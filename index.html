@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Groove Music</title>
+  </head>
+  <body>
+    <div id="main-container">
+      <div id="now-playing-bar">
+        <div class="now-playing-bar__song-details">
+          <img id="js-song-art" src="./img/lights.jpg" alt="" srcset="" />
+          <div class="now-playing-bar__song-details__details">
+            <div class="song-title" id="js-song-title">Lights</div>
+            <div class="song-artist" id="js-song-artist">Sappheiros</div>
+          </div>
+        </div>
+        <div class="now-playing-bar__controls">
+          <div class="now-playing-bar__controls__buttons">
+            <div class="shuffle-btn ctrl-btn">
+              <i
+                class="ms-Icon ms-Icon--RemoveLinkChain"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="prev ctrl-btn" id="js-prev-btn">
+              <i class="ms-Icon ms-Icon--Previous" aria-hidden="true"></i>
+            </div>
+            <div class="play ctrl-btn ctrl-btn--big" id="js-play-btn">
+              <i
+                id="js-play-icon"
+                class="ms-Icon ms-Icon--Play"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="nxt ctrl-btn" id="js-nxt-btn">
+              <i class="ms-Icon ms-Icon--Next" aria-hidden="true"></i>
+            </div>
+            <div class="rpt ctrl-btn" id="js-rpt-btn">
+              <i class="ms-Icon ms-Icon--RepeatAll" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="audio-time" id="js-audio-time">
+            <p class="current-time" id="js-current-time">0:00</p>
+            <input type="range" value="0" name="" id="js-track-ctrl" />
+            <p class="total-time" id="js-total-time">0:00</p>
+          </div>
+          <audio id="audio">
+            <source src="audios/Lights.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div class="now-playing-bar__volume">
+          <div class="vol-btns">
+            <div class="ctrl-btn">
+              <i
+                id="js-vol-icon"
+                class="ms-Icon ms-Icon--Volume2"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <input type="range" name="" value="100" id="js-vol-ctrl" />
+            <div class="ctrl-btn">
+              <i
+                id=""
+                class="ms-Icon ms-Icon--FullScreen"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <div class="ctrl-btn">
+              <i
+                id=""
+                class="ms-Icon ms-Icon--MoreVertical"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </div>
+          <div class="vol__dunder"></div>
+        </div>
+      </div>
+      <div class="sidebar" id="sidebar">
+        <div id="sidebar__header" class="sidebar__header">
+          <div class="sidebar__back">
+            <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+          </div>
+          <div class="sidebar__title">
+            <p>Groove Music</p>
+          </div>
+        </div>
+        <div class="sidebar__burger" onclick="toggleSidebar()">
+          <i class="ms-Icon ms-Icon--GlobalNavButton" aria-hidden="true"></i>
+        </div>
+        <div id="sidebar_search" class="sidebar__search">
+          <div class="sidebar__search__div">
+            <input
+              type="text"
+              name=""
+              id="sidebar__search__input"
+              placeholder="Search"
+            />
+            <div class="sidebar__search__clear">
+              <i class="ms-Icon ms-Icon--Clear" aria-hidden="true"></i>
+            </div>
+            <div id="sidebar__search__search" class="sidebar__search__search">
+              <i class="ms-Icon ms-Icon--Search" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+
+        <div id="sidebar__main" class="sidebar__main">
+          <div id="sidebar__main__menu" class="sidebar__main__menu">
+            <div
+              class="page menu sidebar__my-music active-page"
+              onclick="openTab(event, 'myMusic')"
+            >
+              <i
+                class="ms-Icon ms-Icon--MusicInCollection"
+                aria-hidden="true"
+              ></i>
+              <p>My Music</p>
+            </div>
+            <div
+              class="page menu sidebar__recent-plays"
+              onclick="openTab(event, 'recentPlays')"
+            >
+              <i class="ms-Icon ms-Icon--Recent" aria-hidden="true"></i>
+              <p>Recent plays</p>
+            </div>
+            <div
+              class="page menu sidebar_now-playing"
+              onclick="startNowPlaying()"
+            >
+              <i class="ms-Icon ms-Icon--PowerBILogo16" aria-hidden="true"></i>
+              <p>Now playing</p>
+            </div>
+          </div>
+          <div
+            id="sidebar__main__playlist-bar"
+            class="sidebar__main__playlist-bar"
+          >
+            <div class="menu sidebar__playlist">
+              <i
+                class="ms-Icon ms-Icon--BulletedTreeList"
+                aria-hidden="true"
+              ></i>
+              <p>Playlists</p>
+            </div>
+            <div onclick="togglePlaylist()" class="sidebar__playlist__plus">
+              <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div id="sidebar__main__playlists" class="sidebar__main__playlists">
+            <div class="menu">
+              <i class="ms-Icon ms-Icon--Media" aria-hidden="true"></i>
+              <p>Autoplaylist</p>
+            </div>
+          </div>
+        </div>
+        <div id="sidebar__settings" class="sidebar__settings">
+          <div class="menu">
+            <i class="ms-Icon ms-Icon--Settings" aria-hidden="true"></i>
+            <p>Settings</p>
+          </div>
+        </div>
+      </div>
+      <div id="main_display" class="main_display">
+        <div id="mobile-sidebar" class="mobile-sidebar">
+          <div class="mobile-sidebar__title">
+            <div class="mobile_back">
+              <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+            </div>
+            <div class="mobile-title">
+              <p>Groove Music</p>
+            </div>
+          </div>
+          <div class="mobile-sidebar__burger">
+            <div class="sidebar__burger" onclick="toggleMobile()">
+              <i
+                class="ms-Icon ms-Icon--GlobalNavButton"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </div>
+          <div
+            class="page menu sidebar__my-music"
+            onclick="openTab(event, 'myMusic')"
+          >
+            <i
+              class="ms-Icon ms-Icon--MusicInCollection"
+              aria-hidden="true"
+            ></i>
+            <p>My Music</p>
+          </div>
+          <div
+            class="page menu sidebar__recent-plays"
+            onclick="openTab(event, 'recentPlays')"
+          >
+            <i class="ms-Icon ms-Icon--Recent" aria-hidden="true"></i>
+            <p>Recent plays</p>
+          </div>
+          <div class="page menu sidebar_now-playlists">
+            <i
+              class="ms-Icon ms-Icon--PowerBILogo16"
+              aria-hidden="true"
+              onclick=""
+            ></i>
+            <p>Playlists</p>
+          </div>
+          <div class="page menu sidebar_now-playing">
+            <i
+              class="ms-Icon ms-Icon--PowerBILogo16"
+              aria-hidden="true"
+              onclick="openTab(event, 'nowPlaying')"
+            ></i>
+            <p>Now playing</p>
+          </div>
+
+          <div class="mobile-sidebar-settings">
+            <div class="dunder"></div>
+            <div class="menu">
+              <i class="ms-Icon ms-Icon--Settings" aria-hidden="true"></i>
+              <p>Settings</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="main_display_mobile_top">
+          <div class="main_display_mobile_top_title_bar">
+            <div class="mobile_back">
+              <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+            </div>
+            <div class="mobile-title">
+              <p>Groove Music</p>
+            </div>
+          </div>
+        </div>
+        <div id="myMusic" class="pageContent main_display__my_music">
+          <div id="js_main_display__header" class="main_display__header mobile">
+            <div class="sidebar__burger" onclick="toggleMobile()">
+              <i
+                class="ms-Icon ms-Icon--GlobalNavButton"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <p>My Music</p>
+          </div>
+          <div class="main_display__my_music__tabs">
+            <button
+              class="tab active-myMusic"
+              onclick="openTab(event, 'songs')"
+            >
+              <p>Songs</p>
+            </button>
+            <button class="tab" onclick="openTab(event, 'artists')">
+              <p>Artists</p>
+            </button>
+            <button class="tab" onclick="openTab(event, 'albums')">
+              <p>Albums</p>
+            </button>
+          </div>
+          <div class="main_display__filters">
+            <div class="filter shuffle">
+              <i
+                class="ms-Icon ms-Icon--InternetSharing"
+                aria-hidden="true"
+              ></i>
+              <p>Shuffle all (2135)</p>
+            </div>
+            <div class="filter">
+              <p>Sort by:</p>
+              <p class="blue">Date added</p>
+            </div>
+            <div class="filter">
+              <p>Genre:</p>
+              <p class="blue">All genres</p>
+            </div>
+          </div>
+
+          <div id="albums" class="tabcontent albums">
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/lights.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+          </div>
+          <div id="artists" class="tabcontent artists">
+            <div class="letter">
+              <p>#</p>
+              <div class="artists-by-letter">
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>21 Savage</p>
+                </div>
+              </div>
+            </div>
+            <div class="letter">
+              <p>A</p>
+              <div class="artists-by-letter">
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>AJR</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Asa</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Adekunle Gold</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Alan Walker</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Agenlique Kidjo</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Avicii</p>
+                </div>
+              </div>
+            </div>
+            <div class="letter">
+              <p>B</p>
+              <div class="artists-by-letter">
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Bastille</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Beautiful Nubia</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Ben Howard</p>
+                </div>
+                <div class="artist">
+                  <div class="artist-art">
+                    <div class="artist_buttons">
+                      <button class="artist-play">
+                        <i class="ms-Icon ms-Icon--Play" aria-hidden="true"></i>
+                      </button>
+                      <button class="artist-add">
+                        <i class="ms-Icon ms-Icon--Add" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+                  </div>
+                  <p>Burna Boy</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="songs" class="tabcontent songs">
+            <table>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Stan</td>
+                <td>Eminem</td>
+                <td>Curtain Call: The Hits</td>
+                <td>2005</td>
+                <td>Rap/Hip Hop</td>
+                <td>6:43</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Ifunaya</td>
+                <td>Dwin, The Stoic</td>
+                <td>Ifunaya</td>
+                <td>2021</td>
+                <td>Singer/Songwriter</td>
+                <td>2:54</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Rap Messiah</td>
+                <td>LADIPOE</td>
+                <td>Rap Messiah</td>
+                <td>2021</td>
+                <td>Rap/Hip Hop</td>
+                <td>1:55</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>500 Miles</td>
+                <td>Peter, Paul And Mary</td>
+                <td>Peter, Paul And Mary</td>
+                <td>1970</td>
+                <td>Folk</td>
+                <td>2:57</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>One by One</td>
+                <td>Enya</td>
+                <td>The Very Best of Enya (Deluxe Edition)</td>
+                <td>2009</td>
+                <td>Pop</td>
+                <td>3:56</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Wild Child</td>
+                <td>Enya</td>
+                <td>The Very Best of Enya (Deluxe Edition)</td>
+                <td>2009</td>
+                <td>Pop</td>
+                <td>3:47</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>MIDDLE CHILD</td>
+                <td>J. Cole</td>
+                <td>MIDDLE CHILD</td>
+                <td>2019</td>
+                <td>Rap/Hip Hop</td>
+                <td>3:33</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Towing the Line</td>
+                <td>Ben Howard</td>
+                <td>Noonday Dream</td>
+                <td>2018</td>
+                <td>Singer/Songwriter</td>
+                <td>3:55</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Royals</td>
+                <td>Lorde</td>
+                <td>Pure Heroin</td>
+                <td>2013</td>
+                <td>Electronic</td>
+                <td>3:10</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>SAD!</td>
+                <td>XXXTentacion</td>
+                <td>?</td>
+                <td>2018</td>
+                <td>Trap/Rap</td>
+                <td>2:46</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Lucid Dreams</td>
+                <td>Juice Wrld</td>
+                <td>Goodbye & Good Riddance</td>
+                <td>2018</td>
+                <td>Trap/Rap</td>
+                <td>3:59</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>All Girls Are the Same</td>
+                <td>Juice Wrld</td>
+                <td>Goodbye & Good Riddance</td>
+                <td>2018</td>
+                <td>Trap/Rap</td>
+                <td>2:45</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Moonlight</td>
+                <td>XXXTentacion</td>
+                <td>?</td>
+                <td>2018</td>
+                <td>Trap/Rap</td>
+                <td>2:15</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>changes</td>
+                <td>XXXTentacion</td>
+                <td>?</td>
+                <td>2018</td>
+                <td>Trap/Rap</td>
+                <td>2:01</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Rings of Saturn</td>
+                <td>Nick Cave & The Bad Seeds</td>
+                <td>Skeleton Tree</td>
+                <td>2016</td>
+                <td>Alternative</td>
+                <td>3:28</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Save Tonight</td>
+                <td>Eagle-Eye Cherry</td>
+                <td>Desireless</td>
+                <td>1998</td>
+                <td>Pop</td>
+                <td>4:02</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Sound of Silence</td>
+                <td>Simon & Garfunkel</td>
+                <td>Bridge Over Troubled Waters</td>
+                <td>1997</td>
+                <td>Folk</td>
+                <td>3:12</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Mrs. Robinson</td>
+                <td>Simon & Garfunkel</td>
+                <td>Bridge Over Troubled Waters</td>
+                <td>1997</td>
+                <td>Folk</td>
+                <td>3:12</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>Vienna</td>
+                <td>Billy Joel</td>
+                <td>The Stranger</td>
+                <td>1977</td>
+                <td>Rock</td>
+                <td>3:34</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>G</td>
+                <td>Jesse Jagz</td>
+                <td>Garba</td>
+                <td>2020</td>
+                <td>Rap/Hip Hop</td>
+                <td>7:43</td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="ms-Icon ms-Icon--Checkbox" aria-hidden="true"></i>
+                </td>
+                <td>A</td>
+                <td>Jesse Jagz</td>
+                <td>Garba</td>
+                <td>2020</td>
+                <td>Rap/Hip Hop</td>
+                <td>4:24</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div id="recentPlays" class="pageContent main_display__recent_plays">
+          <div id="" class="main_display__header mobile">
+            <div class="sidebar__burger" onclick="toggleMobile()">
+              <i
+                class="ms-Icon ms-Icon--GlobalNavButton"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <p>Recent Plays</p>
+          </div>
+          <div class="main_display__filters recent_plays_filters">
+            <div class="filter shuffle">
+              <i
+                class="ms-Icon ms-Icon--InternetSharing"
+                aria-hidden="true"
+              ></i>
+              <p>Shuffle all music</p>
+            </div>
+          </div>
+          <div class="recent_plays_albums">
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+            <div class="album">
+              <img src="img/album.jpg" alt="" />
+              <p class="album-title"><strong>Album Title</strong></p>
+              <p class="album-artist">Album Artist</p>
+            </div>
+          </div>
+        </div>
+        <div id="nowPlaying" class="pageContent main_display__now_playing">
+          <div class="main_display__header">
+            <p>Now Playing</p>
+          </div>
+          <!-- <div class="sidebar__back now_playing_back">
+                        <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+                    </div> -->
+        </div>
+      </div>
+    </div>
+    <div id="now-playing-page">
+      <div class="now-playing-bg" id="now-playing-bg">eee</div>
+      <div class="now-playing-page__title">
+        <div
+          id="js-now-playing-page-back"
+          class="now-playing-page__title__back"
+        >
+          <i class="ms-Icon ms-Icon--Back" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div id="js-now-playing-page" class="now-playing-page__list">
+        <div id="js-hidelist-div" class="now-playing-page__list__hide">
+          <i
+            id="js-hidelist-icon"
+            class="ms-Icon ms-Icon--ChevronDown"
+            aria-hidden="true"
+          ></i>
+        </div>
+        <div
+          class="now-playing-page__list__music-list"
+          id="js-now-playing-page__list__music-list"
+        ></div>
+      </div>
+    </div>
+    <div id="js-create-playlist-page" class="create-playlist-page">
+      <div class="create-playlist" id="js-create-playlist">
+        <div class="create-playlist__playlist-img">
+          <i class="ms-Icon ms-Icon--FavoriteList" aria-hidden="true"></i>
+        </div>
+        <div class="create-playlist__playlist-input">
+          <input
+            type="text"
+            name=""
+            id="js-new-playlist-name"
+            placeholder="Name this playlist"
+            value=""
+          />
+          <i class="ms-Icon ms-Icon--OpenEnrollment" aria-hidden="true"></i>
+        </div>
+        <div class="create-playlist__playlist-created-by">
+          Created by Femi Ayo-Tubosun
+        </div>
+        <div class="create-playlist__buttons">
+          <button class="create-playlist__button" onclick="createPlaylist()">
+            Create playlist
+          </button>
+
+          <button
+            class="create-playlist__button create-playlist__button--transparent"
+            onclick="togglePlaylist()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var collapsed = false;
+      function openTab(evt, targetName) {
+        var tabs = ["songs", "artists", "albums"];
+        var pages = ["myMusic", "recentPlays", "nowPlaying"];
+        var i;
+        var links;
+
+        if (tabs.includes(targetName)) {
+          var x = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+
+          links = document.getElementsByClassName("tab");
+          for (i = 0; i < x.length; i++) {
+            links[i].className = links[i].className.replace(
+              "active-myMusic",
+              ""
+            );
+          }
+
+          document.getElementById(targetName).style.display = "block";
+          if (targetName === "albums") {
+            document.getElementById(targetName).style.display = "flex";
+          }
+          evt.currentTarget.className += " active-myMusic";
+        }
+
+        if (pages.includes(targetName)) {
+          var x = document.getElementsByClassName("pageContent");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+
+          links = document.getElementsByClassName("page");
+          for (i = 0; i < links.length; i++) {
+            links[i].className = links[i].className.replace("active-page", "");
+          }
+          document.getElementById(targetName).style.display = "block";
+          evt.currentTarget.className += " active-page";
+        }
+      }
+
+      function toggleSidebar(fromMediaQuery = false) {
+        const main_display = document.querySelector("#main_display");
+        const sidebar = document.querySelector("#sidebar");
+        const sidebar__header = document.querySelector("#sidebar__header");
+        const sidebar_search = document.querySelector("#sidebar_search");
+        const sidebar__main = document.querySelector("#sidebar__main");
+        const sidebar__main__menu = document.querySelector(
+          "#sidebar__main__menu"
+        );
+        const sidebar__main__playlist__bar = document.querySelector(
+          "#sidebar__main__playlist-bar"
+        );
+        const sidebar__main__playlists = document.querySelector(
+          "#sidebar__main__playlists"
+        );
+        const sidebar__settings = document.querySelector("#sidebar__settings");
+        const search_icon = document.querySelector("#sidebar__search__search");
+
+        main_display.classList.toggle("collapsed");
+        sidebar.classList.toggle("collapsed");
+        sidebar__header.classList.toggle("collapsed");
+        sidebar_search.classList.toggle("collapsed");
+        sidebar__main.classList.toggle("collapsed");
+        sidebar__main__menu.classList.toggle("collapsed");
+        sidebar__main__playlist__bar.classList.toggle("collapsed");
+        sidebar__main__playlists.classList.toggle("collapsed");
+        sidebar__settings.classList.toggle("collapsed");
+
+        search_icon.hasAttribute("onclick")
+          ? search_icon.removeAttribute("onclick")
+          : search_icon.setAttribute("onclick", "toggleSidebarWithSearch()");
+
+        if (!fromMediaQuery) {
+          collapsed = main_display.classList.contains("collapsed")
+            ? true
+            : false;
+        }
+      }
+
+      function toggleSidebarWithSearch() {
+        toggleSidebar();
+        sidebar__search__input = document.querySelector(
+          "#sidebar__search__input"
+        );
+        sidebar__search__input.focus();
+      }
+
+      function toggleMobile() {
+        sidebar = document.querySelector("#mobile-sidebar");
+
+        window.getComputedStyle(sidebar).display === "none"
+          ? (sidebar.style.display = "block")
+          : (sidebar.style.display = "none");
+      }
+
+      var mediumScreenQuery = window.matchMedia("(max-width: 1171px)");
+      var bigScreenQuery = window.matchMedia("(min-width: 1172px)");
+
+      mediumScreenQuery.addEventListener("change", (e) => {
+        if (e.matches && !collapsed) {
+          const main_display = document.querySelector("#main_display");
+          toggleSidebar(true);
+        }
+      });
+
+      bigScreenQuery.addEventListener("change", (e) => {
+        sidebar = document.querySelector("#mobile-sidebar");
+        sidebar.style.display = "none";
+
+        if (e.matches && !collapsed) {
+          toggleSidebar();
+        }
+      });
+      audioList = {
+        0: {
+          mp3: "John_Bartmann_-_07_-_African_Moon.mp3",
+          img: "Woke The Fuck Up.jpg",
+          artist: "John Bartmann",
+          title: "African Moon",
+          year: "2018",
+          album: "Public Domain Soundtrack Music",
+          duration: "2:24",
+        },
+        1: {
+          mp3: "Lights.mp3",
+          img: "lights.jpg",
+          artist: "Sappheiros",
+          title: "Lights",
+          year: "2017",
+          album: "Public Domain Soundtrack Music",
+          duration: "3:26",
+        },
+        2: {
+          mp3: "John_Bartmann_-_07_-_African_Moon.mp3",
+          img: "Woke The Fuck Up.jpg",
+          artist: "John Bartmann",
+          title: "African Moon",
+          year: "2018",
+          album: "Public Domain Soundtrack Music",
+          duration: "2:24",
+        },
+        3: {
+          mp3: "Lights.mp3",
+          img: "lights.jpg",
+          artist: "Sappheiros",
+          title: "Lights",
+          year: "2017",
+          album: "Public Domain Soundtrack Music",
+          duration: "3:26",
+        },
+      };
+
+      currentSongIndex = 0;
+
+      aud = document.getElementById("audio");
+      play = document.querySelector("#js-play-btn");
+      playIcon = document.querySelector("#js-play-icon");
+      next = document.querySelector("#js-nxt-btn");
+      prev = document.querySelector("#js-prev-btn");
+      songTitle = document.querySelector("#js-song-title");
+      songArtist = document.querySelector("#js-song-artist");
+      songArt = document.querySelector("#js-song-art");
+      progress = document.querySelector("#js-current-time-bar");
+      songLength = document.querySelector("#js-total-time");
+      songCurrentTime = document.querySelector("#js-current-time");
+      volCtrl = document.querySelector("#js-vol-ctrl");
+      volIcon = document.querySelector("#js-vol-icon");
+      trackCtrl = document.querySelector("#js-track-ctrl");
+      hidePlayingBtn = document.querySelector("#js-hidelist-div");
+      hidePlayingIcn = document.querySelector("#js-hidelist-icon");
+      nowPlayingPage = document.querySelector("#now-playing-page");
+      nowPlayingPage2 = document.querySelector("#js-now-playing-page");
+      nowPlayingBar = document.querySelector("#now-playing-bar");
+      nowPlayingBack = document.querySelector("#js-now-playing-page-back");
+      playlistPage = document.querySelector("#js-create-playlist-page");
+
+      var playlists = [];
+      // Load songs to now playing
+
+      function loadToNowPlaying() {
+        setBg("default");
+        listOfSongs = document.querySelector(
+          "#js-now-playing-page__list__music-list"
+        );
+        Object.keys(audioList).forEach((el, index) => {
+          listOfSongs.innerHTML += `
+              <div class="now-playing-page__list__music" onclick=nowPlay(${index})>
+                <div class="now-playing-page__list__music__chck">
+                  <i
+                    id="js-vol-icon"
+                    class="ms-Icon ms-Icon--Checkbox"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <div class="now-playing-page__list__music__title">
+                  <i
+                    id="js-vol-icon"
+                    class="ms-Icon ms-Icon--BarChart4"
+                    aria-hidden="true"
+                  ></i>
+                  <p>${audioList[el].title}</p>
+                  <div class="music-list-btns">
+                    <div class="music-list-btn">
+                      <i
+                        id="js-vol-icon"
+                        class="ms-Icon ms-Icon--Play"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                    <div class="music-list-btn">
+                      <i
+                        id="js-vol-icon"
+                        class="ms-Icon ms-Icon--CalculatorSubtract"
+                        aria-hidden="true"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="now-playing-page__list__music__artist">
+                  <p>${audioList[el].artist}</p>
+                </div>
+                <div class="now-playing-page__list__music__album">
+                  <p>${audioList[el].album}</p>
+                </div>
+                <div class="now-playing-page__list__music__year">
+                  <p>${audioList[el].year}</p>
+                </div>
+                <div class="now-playing-page__list__music__duration">
+                  <p>${audioList[el].duration}</p>
+                </div>
+              </div>
+
+              `;
+        });
+      }
+
+      function createPlaylist() {
+        // Get new playlist and append.
+        listname = document.querySelector("#js-new-playlist-name").value;
+        playlists.push(listname);
+        document.querySelector(
+          "#sidebar__main__playlists"
+        ).innerHTML += ` <div class="menu">
+              <i class="ms-Icon ms-Icon--Media" aria-hidden="true"></i>
+              <p>${listname}</p>
+              </div>`;
+
+        return togglePlaylist();
+      }
+
+      function togglePlaylist() {
+        document.querySelector("#js-new-playlist-name").value = "";
+        playlistPage.classList.toggle("show-playlist");
+      }
+      hidePlayingBtn.addEventListener("click", function () {
+        nowPlayingPage2.classList.toggle("hide-now-playing");
+        hidePlayingIcn.classList.toggle("ms-Icon--ChevronUp");
+        nowPlayingBar.classList.toggle("hide-now-playing");
+        hidePlayingIcn.classList.contains("ms-Icon--ChevronUp")
+          ? setBg(audioList[currentSongIndex].img)
+          : setBg("default");
+      });
+
+      nowPlayingBack.addEventListener("click", function () {
+        nowPlayingPage.classList.toggle("now-playing--full");
+        nowPlayingBar.classList.toggle("now-playing--full");
+      });
+
+      function startNowPlaying() {
+        console.log("Shit");
+        nowPlayingPage.classList.toggle("now-playing--full");
+        nowPlayingBar.classList.toggle("now-playing--full");
+      }
+      volCtrl.addEventListener("change", function (e) {
+        aud.volume = e.currentTarget.value / 100;
+        if (e.currentTarget.value < 2) {
+          volIcon.classList.remove("ms-Icon--Volume1");
+          volIcon.classList.remove("ms-Icon--Volume2");
+          volIcon.classList.remove("ms-Icon--Volume3");
+
+          volIcon.classList.add("ms-Icon--Volume0");
+        } else if (e.currentTarget.value < 31) {
+          volIcon.classList.remove("ms-Icon--Volume0");
+          volIcon.classList.remove("ms-Icon--Volume2");
+          volIcon.classList.remove("ms-Icon--Volume3");
+
+          volIcon.classList.add("ms-Icon--Volume1");
+        } else if (e.currentTarget.value < 68) {
+          volIcon.classList.remove("ms-Icon--Volume0");
+          volIcon.classList.remove("ms-Icon--Volume1");
+          volIcon.classList.remove("ms-Icon--Volume3");
+
+          volIcon.classList.add("ms-Icon--Volume2");
+        } else {
+          volIcon.classList.remove("ms-Icon--Volume0");
+          volIcon.classList.remove("ms-Icon--Volume1");
+          volIcon.classList.remove("ms-Icon--Volume2");
+
+          volIcon.classList.add("ms-Icon--Volume3");
+        }
+      });
+
+      trackCtrl.addEventListener("change", (e) => {
+        aud = document.getElementById("audio");
+        aud.currentTime = (e.currentTarget.value / 100) * aud.duration;
+      });
+
+      play.addEventListener("click", function () {
+        if (aud.paused) {
+          aud.play();
+          playIcon.classList.remove("ms-Icon--Play");
+          playIcon.classList.add("ms-Icon--Pause");
+          // Chang Icon to pause
+        } else {
+          aud.pause();
+          playIcon.classList.add("ms-Icon--Play");
+          playIcon.classList.remove("ms-Icon--Pause");
+        }
+      });
+      function setBg(img) {
+        if (img === "default") {
+          document.querySelector("#now-playing-bg").style.backgroundImage = "";
+
+          document.querySelector("#now-playing-bg").style.backgroundColor =
+            "#545454";
+        }
+
+        document.querySelector(
+          "#now-playing-bg"
+        ).style.backgroundImage = `url('img/${img}')`;
+      }
+
+      function playSong() {
+        aud.src = "audios\\" + audioList[currentSongIndex].mp3;
+
+        songTitle.textContent = audioList[currentSongIndex].title;
+        songArtist.textContent = audioList[currentSongIndex].artist;
+        songArt.src = "img\\" + audioList[currentSongIndex].img;
+        var allSongs = document.getElementsByClassName(
+          "now-playing-page__list__music"
+        );
+
+        Array.from(allSongs).forEach((el, index) => {
+          if (index === currentSongIndex) {
+            el.classList.add("selected-song");
+          } else {
+            el.classList.remove("selected-song");
+          }
+        });
+
+        if (hidePlayingIcn.classList.contains("ms-Icon--ChevronUp")) {
+          setBg(audioList[currentSongIndex].img);
+        } else {
+          setBg("default");
+        }
+
+        play.click();
+
+        // Update Song Length
+      }
+
+      function nowPlay(songIndex) {
+        currentSongIndex = songIndex;
+
+        return playSong();
+      }
+      next.addEventListener("click", function () {
+        if (currentSongIndex === Object.keys(audioList).length - 1) {
+          currentSongIndex = 0;
+          return playSong();
+        }
+        currentSongIndex++;
+        playSong();
+      });
+
+      prev.addEventListener("click", function () {
+        if (currentSongIndex === 0) {
+          currentSongIndex = Object.keys(audioList).length - 1;
+          return playSong();
+        }
+        currentSongIndex--;
+        playSong();
+      });
+
+      aud.ontimeupdate = function () {
+        setTimeout(() => {
+          songLength.textContent = formatSeconds(aud.duration);
+        }, 500);
+
+        trackCtrl.value = (aud.currentTime / aud.duration) * 100;
+        setTimeout(() => {
+          songCurrentTime.textContent = formatSeconds(aud.currentTime);
+        }, 500);
+        if (aud.currentTime >= aud.duration) {
+          if (currentSongIndex === Object.keys(audioList).length - 1) {
+            currentSongIndex = 0;
+            return playSong();
+          }
+          currentSongIndex++;
+          return playSong();
+        }
+      };
+
+      // custom function for formating seconds to mm:ss
+      function formatSeconds(t) {
+        mins = Math.floor(t / 60);
+        secs = t - mins * 60;
+        secs = Math.round(secs);
+        secs = secs < 10 ? "0" + secs : secs;
+
+        return mins + ":" + secs;
+      }
+
+      loadToNowPlaying();
+    </script>
+  </body>
+</html>
