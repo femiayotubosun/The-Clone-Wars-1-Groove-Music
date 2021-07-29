@@ -16,8 +16,8 @@
 
 ![Groove 4](https://i.ibb.co/8BK5vTN/Screenshot-274.png)
 
-> Line 1030 in the `index.html` file can be editted to play your
-favourite songs!
+> Edit Line 1030 in the `index.html` file can be editted to play your
+favourite songs! Place your mp3 files in /audios/
 ```sh
           audioList = {
         0: {
